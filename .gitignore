@@ -1,0 +1,4 @@
+.ccls-cache/*
+.ccls
+build/*
+compile_commands.json
