@@ -4,3 +4,6 @@
 [submodule "external/libelfin"]
 	path = external/libelfin
 	url = git@github.com:aclements/libelfin.git
+[submodule "external/doctest"]
+	path = external/doctest
+	url = https://github.com/onqtam/doctest
