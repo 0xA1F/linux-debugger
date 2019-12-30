@@ -1,3 +1,6 @@
+#ifndef DEBUGGER_H
+#define DEBUGGER_H
+
 #include <string>
 #include <vector>
 #include <unistd.h>
@@ -15,3 +18,5 @@ class Debugger {
         pid_t m_pid;
         
 };
+
+#endif
