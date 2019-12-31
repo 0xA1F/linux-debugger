@@ -12,6 +12,7 @@ class Debugger {
 
         void run();
         void handleCommand(const std::string& command);
+        void continueExecution();
 
     private:
         std::string m_prog_name;
