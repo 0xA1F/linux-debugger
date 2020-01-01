@@ -4,6 +4,17 @@
 
 #include "debugger.hpp"
 
+
+void executeDebuggee(const std::string& prog)
+{
+    if (ptrace(PTRACE_TRACEME, 0, 0, 0) < 0) {
+        std::cerr << "Error in ptrace\n";
+        return;
+    }
+    execl(prog.c_str(), prog.c_str(), nullptr);
+}
+
+
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << "Program name not specified";
@@ -17,9 +28,7 @@ int main(int argc, char* argv[]) {
         // we are in the child process
         // execute debuggee
         // enable debuggee control in parent process
-        ptrace(PTRACE_TRACEME, 0, nullptr, nullptr);
-        // execute debuggee
-        execl(prog, prog, nullptr);
+        executeDebuggee(prog);
     }
 
     else if (pid >= 1) {
