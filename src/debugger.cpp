@@ -27,12 +27,16 @@ void Debugger::run() {
 }
 
 void Debugger::handleCommand(const std::string& command) {
-   auto commangArgs = splitLine(command, ' ');
+   auto commandArgs = splitLine(command, ' ');
 
-   auto cmd = commangArgs[0];
+   auto cmd = commandArgs[0];
 
    if(isPrefix(cmd, "continue")) {
        continueExecution();
+   }
+   else if (isPrefix(cmd, "break")) {
+       std::string addr {commandArgs[1], 2}; //assume that the address is in 0xADDRESS format
+       setBreakpointAtAddress(std::stol(addr, 0, 16));
    }
    else if (isPrefix(cmd, "exit")) {
        exit(0);
@@ -41,7 +45,6 @@ void Debugger::handleCommand(const std::string& command) {
        std::cerr << "Unknown command: " << cmd << "\n";
    }
 }
-
 
 
 void Debugger::continueExecution() {
@@ -53,3 +56,14 @@ void Debugger::continueExecution() {
 
     waitpid(m_pid, &wait_status, options);
 }
+
+
+void Debugger::setBreakpointAtAddress(const std::intptr_t address) {
+    std::cout << "Set breakpoint at address 0x" << std::hex << address << "\n";
+    Breakpoint bp {m_pid, address};
+    bp.enable();
+    m_breakpoints.insert({address, bp});
+}
+
+
+
