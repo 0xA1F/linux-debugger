@@ -15,5 +15,7 @@ TEST_SUITE("test utils") {
         std::string line = "command run";
         REQUIRE_EQ(true, isPrefix("command ", line));
         REQUIRE_NE(true, isPrefix(line, "command "));
+        REQUIRE_EQ(true, isPrefix("comm", line));
+        REQUIRE_NE(true, isPrefix(line, "comm"));
     }
 }
