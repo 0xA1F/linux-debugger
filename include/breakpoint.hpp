@@ -1,3 +1,6 @@
+#ifndef BREAKPOINT_H
+#define BREAKPOINT_H
+
 #include <cstdint>
 #include <unistd.h>
 #include <sys/ptrace.h>
@@ -21,3 +24,5 @@ class Breakpoint {
         bool m_enabled;
         std::uint8_t m_saved_data;
 };
+
+#endif
